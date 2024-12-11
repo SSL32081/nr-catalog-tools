@@ -27,10 +27,10 @@ rit_catalog_info["data_dir"] = rit_catalog_info["cache_dir"] / "data"
 rit_catalog_info["url"] = "https://ccrgpages.rit.edu/~RITCatalog/"
 rit_catalog_info["metadata_url"] = rit_catalog_info["url"] + "/Metadata/"
 rit_catalog_info["data_url"] = rit_catalog_info["url"] + "/Data/"
-rit_catalog_info["possible_resolutions"] = [100, 120, 88, 118, 130, 140, 144, 160, 200]
+rit_catalog_info["possible_resolutions"] = [84, 88, 118, 100, 120, 130, 140, 144, 160, 200]
 rit_catalog_info["metadata_file_fmts"] = [
-    "RIT:BBH:{:04d}-n{:3d}-id{:d}_Metadata.txt",
-    "RIT:eBBH:{:04d}-n{:3d}-ecc_Metadata.txt",
+    "RIT:BBH:{:04d}-n{:03d}-id{:d}_Metadata.txt",
+    "RIT:eBBH:{:04d}-n{:03d}-ecc_Metadata.txt",
 ]
 rit_catalog_info["waveform_file_fmts"] = [
     "ExtrapStrain_RIT-BBH-{:04d}-n{:3d}.h5",
