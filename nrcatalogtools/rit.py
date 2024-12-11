@@ -585,14 +585,12 @@ class RITCatalogHelper(object):
                 print("...beginning search for {}".format(file_name))
             file_path_web = self.metadata_url + "/" + file_name
             mf = self.metadata_dir / file_name
-            psi4_file_name = self.psi4_filename_from_simname(
-                self.simname_from_metadata_filename(file_name)
-            )
-            psi4_file_path_web = self.psi4_data_url + "/" + psi4_file_name
-            wf_file_name = self.waveform_filename_from_simname(
-                self.simname_from_metadata_filename(file_name)
-            )
-            wf_file_path_web = self.waveform_data_url + "/" + wf_file_name
+
+            # Skip if it does not exists on web
+            if not utils.url_exists(file_path_web):
+                if self.verbosity > 3:
+                    print("...not exists on web: {}".format(file_path_web))
+                continue
 
             if self.use_cache:
                 if os.path.exists(mf) and os.path.getsize(mf) > 0:
@@ -610,6 +608,16 @@ class RITCatalogHelper(object):
                 else:
                     if self.verbosity > 3:
                         print("...tried and failed to find {}".format(file_path_web))
+                    continue
+
+            psi4_file_name = self.psi4_filename_from_simname(
+                self.simname_from_metadata_filename(file_name)
+            )
+            psi4_file_path_web = self.psi4_data_url + "/" + psi4_file_name
+            wf_file_name = self.waveform_filename_from_simname(
+                self.simname_from_metadata_filename(file_name)
+            )
+            wf_file_path_web = self.waveform_data_url + "/" + wf_file_name
 
             if len(metadata_dict) > 0:
                 # Convert to DataFrame and break loop
